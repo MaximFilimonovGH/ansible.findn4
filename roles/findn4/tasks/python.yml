@@ -5,3 +5,6 @@
 - name: python | install pipenv
   ansible.builtin.pip:
     name: pipenv
+
+- name: python | check git
+  shell: "git --version"
