@@ -20,4 +20,4 @@
 #   include_tasks: mongodb.yml
 
 - name: install catwalk
-  include_tasls: catwalk.yml
+  include_tasks: catwalk.yml
