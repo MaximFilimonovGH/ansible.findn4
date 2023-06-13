@@ -6,6 +6,9 @@
   ansible.builtin.pip:
     name: pipenv
 
+- name: python | test pipenv
+  shell: "pipenv --version"
+
 # - name: python | check git
 #   shell: "git --version"
 

@@ -22,5 +22,5 @@
 # - name: install mongodb
 #   include_tasks: mongodb.yml
 
-- name: install catwalk
-  include_tasks: catwalk.yml
+# - name: install catwalk
+#   include_tasks: catwalk.yml
