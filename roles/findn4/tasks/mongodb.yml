@@ -27,13 +27,9 @@
     daemon_reload: true
   become: yes
 
-- name: watcher | start service
+- name: mongodb | start service
   ansible.builtin.systemd:
     state: started
     name: mongod
     enabled: true
   become: yes
-
-- name: watcher | status service
-  shell: "systemctl status mongod"
-  become: true
