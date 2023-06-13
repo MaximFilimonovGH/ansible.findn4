@@ -33,9 +33,26 @@
     dest: "{{ home }}/catwalk"
 
 - name: catwalk | build the catwalk using nimble
-  shell: "nimble -y build -d:release -d:danger -d:no_serialisation"
+  command:
+    chdir: "{{ home }}/catwalk"
+    cmd: "nimble -y build -d:release -d:danger -d:no_serialisation"
   environment:
     PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
 
-# - name: catwalk | install virtual env for testing catwalk
-#   shell: 
+- name: catwalk | install virtual env for testing catwalk
+  command:
+    chdir: "{{ home }}/catwalk"
+    cmd: "pipenv install --skip-lock"
+  become: true
+
+- name: catwalk | make tests script executable
+  command:
+    chdir: "{{ home }}/catwalk"
+    cmd: "chmod +x run_tests.sh"
+  become: true
+
+- name: catwalk | run tests
+  command:
+    chdir: "{{ home }}/catwalk"
+    cmd: "./run_tests.sh"
+  become: true
