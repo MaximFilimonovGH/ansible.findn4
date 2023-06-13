@@ -6,10 +6,10 @@
   ansible.builtin.pip:
     name: pipenv
 
-- name: python | check git
-  shell: "git --version"
+# - name: python | check git
+#   shell: "git --version"
 
-- name: python | check PATH
-  shell: "echo $PATH"
-  environment:
-    PATH: "local:{{ lookup('env','PATH') }}"
+# - name: python | check PATH
+#   shell: "echo $PATH"
+#   environment:
+#     PATH: "local:{{ lookup('env','PATH') }}"
