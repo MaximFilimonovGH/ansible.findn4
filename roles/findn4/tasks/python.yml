@@ -10,5 +10,8 @@
 - name: python | check PATH
   shell: "echo $PATH"
 
+- name: python | check check check
+  shell: "ls {{ home }}/.local/bin"
+
 - name: python | test pipenv
   shell: "pipenv --version"
