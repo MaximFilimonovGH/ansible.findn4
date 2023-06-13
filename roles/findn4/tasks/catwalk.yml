@@ -22,23 +22,10 @@
     path: "{{ home }}/nim-{{ nim_version }}-linux_x64.tar.xz"
     state: absent
 
-- name: catwalk | append nim to PATH
-  shell: "export PATH={{ home }}/nim-{{ nim_version }}/bin:$PATH"
-
 - name: catwalk | add PATH to bashrc
   lineinfile:
     dest: "~/.bashrc"
-    line: export PATH="$HOME/nim-{{ nim_version }}/bin:$PATH"
-
-- name: catwalk | echo PATH
-  shell: "echo $PATH"
+    line: export PATH="{{ home }}/nim-{{ nim_version }}/bin:$PATH"
 
 - name: catwalk | check if nim is running
-  shell: "echo $PATH"
-  environment:
-    PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
-
-- name: catwalk | check if nim is running
-  shell: "nim -v"
-  environment:
-    PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
+  shell: "{{ home }}/nim-{{ nim_version }}/bin/nim -v"
