@@ -30,6 +30,9 @@
     dest: "~/.bashrc"
     line: export PATH="$HOME/nim-{{ nim_version }}/bin:$PATH"
 
+- name: catwalk | echo HOME
+  shell: "echo $HOME"
+
 - name: catwalk | check if nim is running
   shell: "nim -v"
   environment:
