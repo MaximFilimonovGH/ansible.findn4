@@ -2,23 +2,6 @@
 - name: python | check python version
   shell: "python3 --version"
 
-# - name: python | install pipenv
-#   ansible.builtin.pip:
-#     name: pipenv
-#   become: true
-
 - name: python | install pipenv
   shell: "pip3 install pipenv"
   become: true
-
-- name: python | check PATH
-  shell: "echo $PATH"
-
-- name: python | check pip3
-  shell: "pip3 list"
-
-- name: python | find pip3
-  shell: "which pip3"
-
-- name: python | test pipenv
-  shell: "pipenv --version"
