@@ -24,7 +24,7 @@
 - name: catwalk | check if nim is running
   shell: "nim -v"
   environment:
-    PATH: "{{ home }}/nim-{{ nim_version }}/bin:{{ lookup('env','HOME') }}"
+    PATH: "{{ home }}/nim-{{ nim_version }}/bin:{{ lookup('env','PATH') }}"
 
 - name: catwalk | clone the catwalk repository
   git:
@@ -37,7 +37,7 @@
     chdir: "{{ home }}/catwalk"
     cmd: "nimble -y build -d:release -d:danger -d:no_serialisation"
   environment:
-    PATH: "{{ home }}/nim-{{ nim_version }}/bin:{{ lookup('env','HOME') }}"
+    PATH: "{{ home }}/nim-{{ nim_version }}/bin:{{ lookup('env','PATH') }}"
   become: true
 
 - name: catwalk | install virtual env for testing catwalk
