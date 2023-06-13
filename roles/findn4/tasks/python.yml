@@ -1,3 +1,13 @@
 ---
 - name: python | check python version
   shell: "python3 --version"
+
+# - name: python | install python3-pip
+#   apt:
+#     pkg:
+#       - python3-pip
+#   become: true
+
+- name: python | install pipenv
+  ansible.builtin.pip:
+    name: pipenv
