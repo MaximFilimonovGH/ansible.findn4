@@ -52,6 +52,15 @@
     cmd: "chmod +x run_tests.sh"
   become: true
 
+- name: catwalk | delete .env file
+  file:
+    path: "{{ home }}/catwalk/.env"
+
+- name: catwalk | create .env file
+  copy:
+    dest: "{{ home }}/catwalk/.env"
+    content: "CW_BINARY_FILEPATH={{ home }}/catwalk/cw_server"
+
 - name: catwalk | run tests
   command:
     chdir: "{{ home }}/catwalk"
