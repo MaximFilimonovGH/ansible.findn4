@@ -5,11 +5,22 @@
     dest: "{{ home }}"
     mode: 0755
 
+- name: catwalk | create folder for nim
+  file:
+    path: "{{ home }}/nim-{{ nim_version }}"
+    state: directory
+    mode: 0755
+
 - name: catwalk | extract nim
   unarchive:
     src: "{{ home }}/nim-{{ nim_version }}-linux_x64.tar.xz"
     dest: "{{ home }}/nim-{{ nim_version }}"
     remote_src: no
+
+- name: catwalk | remove nim archive file
+  file:
+    path: "{{ home }}/nim-{{ nim_version }}-linux_x64.tar.xz"
+    state: absent
 
 - name: catwalk | append nim to PATH
   shell: "export PATH={{ home }}/nim-{{ nim_version }}/bin:$PATH"
