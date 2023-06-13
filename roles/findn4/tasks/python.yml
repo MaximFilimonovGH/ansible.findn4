@@ -8,3 +8,6 @@
 
 - name: python | check git
   shell: "git --version"
+
+- name: python | check PATH
+  shell: "echo $PATH"
