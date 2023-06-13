@@ -2,9 +2,13 @@
 - name: python | check python version
   shell: "python3 --version"
 
+# - name: python | install pipenv
+#   ansible.builtin.pip:
+#     name: pipenv
+#   become: true
+
 - name: python | install pipenv
-  ansible.builtin.pip:
-    name: pipenv
+  shell: "pip3 install pipenv"
   become: true
 
 - name: python | check PATH
