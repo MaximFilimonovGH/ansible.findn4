@@ -25,6 +25,7 @@
       - mongodb-org-server={{ mongodb_version }}
       - mongodb-org-mongos={{ mongodb_version }}
       - mongodb-org-tools={{ mongodb_version }}
+  become: true
 
 - name: mongodb | force systemd to reread configs
   ansible.builtin.systemd:
