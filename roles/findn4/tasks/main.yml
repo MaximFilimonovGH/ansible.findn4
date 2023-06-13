@@ -16,8 +16,8 @@
       state: latest
   become: true
 
-- name: install mongodb
-  include_tasks: mongodb.yml
+# - name: install mongodb
+#   include_tasks: mongodb.yml
 
-# - name: install catwalk
-#   include_tasls: catwalk.yml
+- name: install catwalk
+  include_tasls: catwalk.yml

@@ -1,0 +1,22 @@
+---
+- name: catwalk | extract nim
+  get_url:
+    url: "https://nim-lang.org/download/nim-{{ nim_version }}-linux_x64.tar.xz"
+    dest: "{{ home }}"
+    mode: 0755
+
+- name: catwalk | extract nim
+  unarchive:
+    src: "{{ home }}/nim-{{ nim_version }}-linux_x64.tar.xz"
+    dest: "{{ home }}/nim-{{ nim_version }}"
+    remote_src: no
+
+- name: catwalk | append nim to PATH
+  shell: "export PATH={{ home }}/nim-{{ nim_version }}/bin:$PATH"
+
+- name: catwalk | add PATH to bashrc
+  lineinfile:
+    dest: "~/.bashrc"
+    line: |
+        # nim path
+        export PATH="$HOME/nim-{{ nim_version }}/bin:$PATH"
