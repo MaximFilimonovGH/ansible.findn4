@@ -21,14 +21,21 @@
     dest: "~/.bashrc"
     line: export PATH="{{ home }}/nim-{{ nim_version }}/bin:$PATH"
 
-- name: catwalk | check folder
-  shell: "ls {{ home }}/nim-{{ nim_version }}"
-
-- name: catwalk | check if nim is running
-  shell: "{{ home }}/nim-{{ nim_version }}/bin/nim -v"
-
 - name: catwalk | check if nim is running
   shell: "nim -v"
   environment:
     PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
 
+- name: catwalk | clone the catwalk repository
+  git:
+    repo: https://github.com/dvolk/catwalk.git
+    version: master
+    dest: "{{ home }}/catwalk"
+
+- name: catwalk | build the catwalk using nimble
+  shell: "nimble -y build -d:release -d:danger -d:no_serialisation"
+  environment:
+    PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
+
+# - name: catwalk | install virtual env for testing catwalk
+#   shell: 
