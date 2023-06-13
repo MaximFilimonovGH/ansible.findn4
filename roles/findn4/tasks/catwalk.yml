@@ -55,5 +55,5 @@
 - name: catwalk | run tests
   command:
     chdir: "{{ home }}/catwalk"
-    cmd: "./run_tests.sh"
+    cmd: "pipenv run pytest test"
   become: true
