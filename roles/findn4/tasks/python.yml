@@ -10,6 +10,12 @@
 - name: python | check PATH
   shell: "echo $PATH"
 
+- name: python | check pip3
+  shell: "pip3 list"
+
+- name: python | find pip3
+  shell: "which pip3"
+
 - name: python | check check check
   shell: "ls {{ home }}/.local/bin"
 
