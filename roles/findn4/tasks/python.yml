@@ -5,6 +5,7 @@
 - name: python | install pipenv
   ansible.builtin.pip:
     name: pipenv
+  become: true
 
 - name: python | test pipenv
   shell: "pipenv --version"
