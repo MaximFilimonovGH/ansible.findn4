@@ -5,16 +5,10 @@
     dest: "{{ home }}"
     mode: 0755
 
-- name: catwalk | create folder for nim
-  file:
-    path: "{{ home }}/nim-{{ nim_version }}"
-    state: directory
-    mode: 0755
-
 - name: catwalk | extract nim
   unarchive:
     src: "{{ home }}/nim-{{ nim_version }}-linux_x64.tar.xz"
-    dest: "{{ home }}/nim-{{ nim_version }}"
+    dest: "{{ home }}"
     remote_src: no
 
 - name: catwalk | remove nim archive file
@@ -32,4 +26,9 @@
 
 - name: catwalk | check if nim is running
   shell: "{{ home }}/nim-{{ nim_version }}/bin/nim -v"
+
+- name: catwalk | check if nim is running
+  shell: "nim -v"
+  environment:
+    PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
 
