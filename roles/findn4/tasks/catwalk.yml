@@ -34,6 +34,6 @@
   shell: "echo $HOME"
 
 - name: catwalk | check if nim is running
-  shell: "nim -v"
+  shell: "echo $PATH"
   environment:
     PATH: "$HOME/nim-{{ nim_version }}/bin:$PATH"
