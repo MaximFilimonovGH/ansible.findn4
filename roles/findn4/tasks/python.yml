@@ -20,8 +20,5 @@
 - name: python | find pip3
   shell: "which pip3"
 
-- name: python | check check check
-  shell: "ls {{ home }}/.local/bin"
-
 - name: python | test pipenv
   shell: "pipenv --version"
