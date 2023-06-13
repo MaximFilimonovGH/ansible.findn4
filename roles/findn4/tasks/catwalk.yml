@@ -38,6 +38,7 @@
     cmd: "nimble -y build -d:release -d:danger -d:no_serialisation"
   environment:
     PATH: "{{ home }}/nim-{{ nim_version }}/bin:$PATH"
+  become: true
 
 - name: catwalk | install virtual env for testing catwalk
   command:
