@@ -27,5 +27,9 @@
     dest: "~/.bashrc"
     line: export PATH="{{ home }}/nim-{{ nim_version }}/bin:$PATH"
 
+- name: catwalk | check folder
+  shell: "ls {{ home }}/nim-{{ nim_version }}"
+
 - name: catwalk | check if nim is running
   shell: "{{ home }}/nim-{{ nim_version }}/bin/nim -v"
+
