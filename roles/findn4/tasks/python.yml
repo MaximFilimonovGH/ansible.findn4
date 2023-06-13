@@ -11,3 +11,5 @@
 
 - name: python | check PATH
   shell: "echo $PATH"
+  environment:
+    PATH: "local:$PATH"
