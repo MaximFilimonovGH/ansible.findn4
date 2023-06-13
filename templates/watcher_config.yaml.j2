@@ -1,0 +1,48 @@
+nextflow_path: /usr/local/bin/nextflow
+input_dir: "{{ home }}/watcher/input"
+output_dir: "{{ home }}/watcher/output"
+log_dir: "{{ home }}/watcher/logs"
+tower_address: https://api.tower.nf
+poll_time: 30
+pipelines:
+  - name: 'lodestone'
+    prefix: 'lodestone'
+    run_command: 'https://github.com/Pathogen-Genomics-Cymru/lodestone.git'
+    config: null
+    profile: 'docker'
+    input_type: 'directory'
+    input_parameter: 'input_dir'
+    output_parameter: 'output_dir'
+    multiple_inputs: false
+    with_tower: false
+    filetype: 'find'
+    params:
+      - unmix_myco: 'no'
+      - kraken_db: 'kraken'
+      - bowtie2_index: 'bowtie2_index'
+      - bowtie_index_name: 'bowtie_index_name'
+      - afanc_myco_db: 'afanc_db'
+      - pattern: '*_R{1,2}.fastq.gz'
+  - name: 'nf-core/scrnaseq'
+    prefix: 'scrnaseq'
+    run_command: 'nf-core/scrnaseq'
+    config: null
+    profile: test,docker
+    version: null
+    input_type: 'file'
+    input_parameter: null
+    output_parameter: 'outdir'
+    with_tower: false
+    filetype: null
+    params: null
+  - name: 'nf-core/smrnaseq'
+    prefix: 'smrnaseq'
+    run_command: 'nf-core/smrnaseq'
+    config: null
+    profile: test,docker
+    version: null
+    input_type: 'file'
+    input_parameter: null
+    output_parameter: 'outdir'
+    with_tower: false
+    params: null

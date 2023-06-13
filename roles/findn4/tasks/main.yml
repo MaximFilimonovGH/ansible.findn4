@@ -1,0 +1,20 @@
+### assumes ubuntu image
+---
+- name: update apt cache
+  apt: update_cache=yes
+  become: true
+
+- name: install packages
+  apt: 
+      pkg: 
+          - curl
+          - build-essential
+          - git
+          - pkg-config
+          - default-jre
+          - unzip
+      state: latest
+  become: true
+
+- name: install mongodb
+  include_tasks: mongodb.yml

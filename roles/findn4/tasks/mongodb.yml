@@ -1,0 +1,39 @@
+---
+- name: mongodb | install mongodb dependencies
+  apt:
+    pkg:
+      - gnupg
+    state: latest
+  become: true
+
+- name: mongodb | import public mongodb GPG key
+  shell: "curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor"
+
+- name: mongodb | create a list file for MongoDB
+  shell: echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu {{ ubuntu_version }}/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+- name: mongodb | reload local package database
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: mongodb | install mongodb packages
+  apt:
+    pkg:
+      - mongodb-org
+
+- name: mongodb | force systemd to reread configs
+  ansible.builtin.systemd:
+    daemon_reload: true
+  become: yes
+
+- name: watcher | start service
+  ansible.builtin.systemd:
+    state: started
+    name: mongod
+    enabled: true
+  become: yes
+
+- name: watcher | status service
+  shell: "systemctl status mongod"
+  become: true
