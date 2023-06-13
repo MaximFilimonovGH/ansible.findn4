@@ -28,6 +28,10 @@
 - name: catwalk | add PATH to bashrc
   lineinfile:
     dest: "~/.bashrc"
-    line: |
-        # nim path
-        export PATH="$HOME/nim-{{ nim_version }}/bin:$PATH"
+    line: export PATH="$HOME/nim-{{ nim_version }}/bin:$PATH"
+
+- name: catwalk | echo
+  shell: "echo $PATH"
+
+- name: catwalk | cat
+  shell: "cat ~/.bashrc"
