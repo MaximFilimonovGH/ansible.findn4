@@ -16,8 +16,8 @@
 
 - name: findn4 | create version.py file
   copy:
-    dest: "{{ home }}/findNeigbours4/version.py"
+    dest: "{{ home }}/findNeighbours4/version.py"
     content: "version = {{ version_var.stdout }}"
 
 - name: findn4 | print version.py contents
-  shell: "cat {{ home }}/findNeigbours4/version.py"
+  shell: "cat {{ home }}/findNeighbours4/version.py"
