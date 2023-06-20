@@ -11,7 +11,7 @@
     state: absent
 
 - name: findn4 | get version variable with setup.py
-  shell: "python3 {{ home }}/findNeighbours/setup.py --version"
+  shell: "python3 {{ home }}/findNeighbours4/setup.py --version"
   register: version_var
 
 - name: findn4 | create version.py file
