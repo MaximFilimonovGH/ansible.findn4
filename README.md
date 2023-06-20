@@ -3,14 +3,16 @@
 This playbook setups the findNeighbours4 application (https://github.com/davidhwyllie/findNeighbour4).
 
 The playbook also installs the following dependencies for running the Nextflow pipelines:
-* [Nextflow](https://www.nextflow.io) 20.11.0-edge
-* [Docker](https://www.docker.com) 5:20.10.14\~3-0~ubuntu-focal
-* [Go](https://go.dev) 1.17.8
-* [Singularity](https://sylabs.io/singularity) v3.9.7
+* [Catwalk](https://github.com/dvolk/catwalk)
+* [Mongodb](https://www.mongodb.com/) 6.0.4
 
-It is designed to run on a clean Ubuntu 20.04 server (i.e. a server on which nextflow etc. have not yet been installed).
+It is designed to run on a clean Ubuntu 20.04 server (i.e. a server on which mongodb, catwalk etc. have not yet been installed).
 
 This repo also contains a GitHub Actions workflow which tests the playbook.
+
+## Requirements
+
+findNeighbours4 requires Python 3.8 or 3.9. Ubuntu 20.04 has Python 3.8 as default.
 
 ## Install instructions
 
@@ -30,54 +32,56 @@ git clone repository
 Run the playbook
 
 ```
-cd ansible.nf-pipeline-watcher
+cd ansible.findn4
 ansible-playbook playbook.yml
 ```
 
-## Updating Watcher script configuration
+## Demo server
 
-You can change configuration of the Watcher script pipeline in `config.yaml` file in `watcher` directory.
+A set of data for demonstration of server function is installed alongside the main software.
+More information on the data alongside more data sets can be found [here](https://github.com/davidhwyllie/findNeighbour4/blob/master/doc/demos_real.md).
 
-After changes are made use the following commands to restart the service:
+To run the server in background use the following command from `findNeighbours4` directory:
 
 ```
-sudo systemctl stop watcher.service
-sudo systemctl daemon-reload
-sudo systemctl start watcher.service
+pipenv run nohup python findNeighbours4_server.py demos/AC587/config/config_demo.json &
 ```
 
-## Updating Watcher service configuration
+To populate the database with test data run a python script that reads fasta files and adds them to mongodb:
 
-You can use Nextflow Tower to monitor pipelines execution.To do so supply Nextlow Tower Access Token in `watcher.service` file and Nextflow Tower address in `config.yaml` file.
+```
+pipenv run python demo/demo_ac587.py
+```
 
-Refer to Watcher script repository for more detail.
+Now all the data is in mongodb and can be accessed from mongodb shell by using the following command: `mongosh`
+
+Additionally, the data can be probed using a set of REST API calls that can be found [here](https://github.com/davidhwyllie/findNeighbour4/blob/master/doc/rest-routes.md), i.e. by using the following commands:
+
+```
+curl localhost:5032/api/v2/2d71e116-1b1d-46e6-86d7-6c82ac3dced8/neighbours_within/10
+
+curl localhost:5032/api/v2/2d71e116-1b1d-46e6-86d7-6c82ac3dced8/annotation
+
+curl localhost:5032/api/v2/2d71e116-1b1d-46e6-86d7-6c82ac3dced8/015fd748-2e21-44e7-9937-fd9363e04bc1/exact_distance
+```
 
 ## Updating software versions
-The versions for the installed software are found in `ansible.nf-pipeline-watcher/roles/nf-pipeline-watcher/defaults/main.yml`. 
+The versions for the installed software are found in `ansible.findn4/roles/findn4/defaults/main.yml`. 
 These can be updated. When updates are made to the playbook, a new GitHub Actions run is triggered.
 
-To check for the latest versions of Nextflow look [here](https://github.com/nextflow-io/nextflow/releases).
-
-Versions of Singularity can be found [here](https://github.com/sylabs/singularity/releases). 
-The release notes should suggest which version of Go to use.
-Note that Singularity is end of life and will be replaced with [Apptainer](https://github.com/apptainer/apptainer).
-
-A list of the latest versions of Docker can be found [here](https://docs.docker.com/engine/release-notes/). 
-To update the version in the ansible you'll have to use the following format `5:VERSION-NO-HERE~3-0~ubuntu-focal`
-
+To check for the latest versions of Mongodb look [here](https://www.mongodb.com/docs/manual/reference/versioning/).
 
 ## GitHub Actions Run
 Everytime a commit is made to master branch, this triggers a run of the GitHub Actions workflow found in 
-`ansible.nf-pipeline-watcher/.github/workflows/main.yml`.
+`ansible.findn4/.github/workflows/main.yml`.
 
-This workflow tests the ansible playbook by running it on a GitHub Actions hosted server. The OS of the server is set in `ansible.nf-pipeline-watcher/.github/workflows/main.yml` in the following line:
+This workflow tests the ansible playbook by running it on a GitHub Actions hosted server. The OS of the server is set in `ansible.findn4/.github/workflows/main.yml` in the following line:
 
 ```
 runs-on: ubuntu-20.04
 ```
 
-This can be changed to another Ubuntu environment e.g. `ubuntu-18.04` (note that if you do this, you'll have to update the Docker version to match the OS
-and that this playbook can only run on Ubuntu servers). 
+This can be changed to another Ubuntu environment e.g. `ubuntu-18.04` (note that if you do this, you'll have to update Python to 3.8 manually and adjust Ubuntu version in `ansible.findn4/roles/findn4/defaults/main.yml` to match the OS and that this playbook can only run on Ubuntu servers). 
 
 More information on GitHub environments can be found [here](https://github.com/actions/virtual-environments).
 
