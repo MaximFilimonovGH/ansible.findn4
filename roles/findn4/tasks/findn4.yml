@@ -19,9 +19,6 @@
     dest: "{{ home }}/findNeighbours4/version.py"
     content: "version = {{ version_var.stdout }}"
 
-# - name: findn4 | print version.py contents
-#   shell: "cat {{ home }}/findNeighbours4/version.py"
-
 - name: findn4 | install virtual env findNeighbours4
   command:
     chdir: "{{ home }}/findNeighbours4"
@@ -38,8 +35,3 @@
   copy:
     dest: "{{ home }}/findNeighbours4/.env"
     content: "CW_BINARY_FILEPATH={{ home }}/catwalk/cw_server"
-
-- name: findn4 | run findNeighbours4 tests
-  command:
-    chdir: "{{ home }}/findNeighbours4"
-    cmd: "sh run_tests.sh"

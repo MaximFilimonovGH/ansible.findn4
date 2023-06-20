@@ -1,0 +1,22 @@
+---
+- name: findn4_demo_AC587 | create log folder
+  file:
+    path: "{{ home }}/findNeighbours4/demos/AC587/log"
+    state: directory
+    mode: 0775
+
+- name: findn4_demo_AC587 | adjust server config for demo
+  template:
+    src: templates/AC587/AC587_demo_config.json.j2
+    dest: "{{ home }}/findNeighbours4/demos/AC587/config/config_demo.json"
+
+- name: findn4_demo_AC587 | adjust python script to load fasta files for demo
+  template:
+    src: templates/AC587/AC587_demo_ac587.py.j2
+    dest: "{{ home }}/findNeighbours4/demo/demo_ac587.py"
+
+- name: check
+  shell: "cat {{ home }}/findNeighbours4/demos/AC587/config/config_demo.json"
+
+- name: check 2
+  shell: "cat {{ home }}/findNeighbours4/demo/demo_ac587.py"
