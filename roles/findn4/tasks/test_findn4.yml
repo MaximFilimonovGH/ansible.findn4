@@ -3,3 +3,4 @@
   command:
     chdir: "{{ home }}/findNeighbours4"
     cmd: "sh run_tests.sh"
+  become: true
