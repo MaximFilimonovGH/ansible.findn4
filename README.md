@@ -53,7 +53,11 @@ To populate the database with test data run a python script that reads fasta fil
 pipenv run python demo/demo_ac587.py
 ```
 
-Now all the data is in mongodb and can be accessed from mongodb shell by using the following command: `mongosh`
+Now all the data is in mongodb and can be accessed from mongodb shell by using the following command:
+```
+mongosh
+```
+Check mongodb [documentation](https://www.mongodb.com/docs/manual/) for further details.
 
 Additionally, the data can be probed using a set of REST API calls that can be found [here](https://github.com/davidhwyllie/findNeighbour4/blob/master/doc/rest-routes.md), i.e. by using the following commands:
 
