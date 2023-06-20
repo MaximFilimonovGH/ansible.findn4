@@ -29,5 +29,7 @@
   become: true
 
 - name: findn4 | downgrade some dependencies to make it work
-  shell: "pipenv pip install bokeh==2.4.0 pandas==1.5.3 sqlalchemy==1.4.48"
+  command:
+    chdir: "{{ home }}/findNeighbours4"
+    cmd: "pipenv pip install bokeh==2.4.0 pandas==1.5.3 sqlalchemy==1.4.48"
   become: true
