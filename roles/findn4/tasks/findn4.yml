@@ -19,5 +19,11 @@
     dest: "{{ home }}/findNeighbours4/version.py"
     content: "version = {{ version_var.stdout }}"
 
-- name: findn4 | print version.py contents
-  shell: "cat {{ home }}/findNeighbours4/version.py"
+# - name: findn4 | print version.py contents
+#   shell: "cat {{ home }}/findNeighbours4/version.py"
+
+- name: findn4 | install virtual env findNeighbours4
+  command:
+    chdir: "{{ home }}/findNeighbours4"
+    cmd: "pipenv install -e . --skip-lock"
+  become: true
