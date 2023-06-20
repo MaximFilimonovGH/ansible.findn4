@@ -1,0 +1,23 @@
+---
+- name: findn4 | clone the findNeighbours4 repository
+  git:
+    repo: https://github.com/davidhwyllie/findNeighbour4.git
+    version: master
+    dest: "{{ home }}/findNeighbours4"
+
+- name: findn4 | delete version.py file
+  file:
+    path: "{{ home }}/findNeighbours4/version.py"
+    state: absent
+
+- name: findn4 | get version variable with setup.py
+  shell: "python3 setup.py --version"
+  register: version_var
+
+- name: findn4 | create version.py file
+  copy:
+    dest: "{{ home }}/findNeigbours4/version.py"
+    content: "version = {{ version_var.stdout }}"
+
+- name: findn4 | print version.py contents
+  shell: "cat {{ home }}/findNeigbours4/version.py"

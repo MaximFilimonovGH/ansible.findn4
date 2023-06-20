@@ -19,14 +19,14 @@
 - name: configure python
   include_tasks: python.yml
 
-- name: install mongodb
-  include_tasks: mongodb.yml
+# - name: install mongodb
+#   include_tasks: mongodb.yml
 
-- name: install catwalk
-  include_tasks: catwalk.yml
+# - name: install catwalk
+#   include_tasks: catwalk.yml
 
-- name: test catwalk
-  include_tasks: test_catwalk.yml
+# - name: test catwalk
+#   include_tasks: test_catwalk.yml
 
-# - name: install findNeighbours4
-#   include_tasks: findn4.yml
+- name: install findNeighbours4
+  include_tasks: findn4.yml
