@@ -42,4 +42,4 @@
 - name: findn4 | run findNeighbours4 tests
   command:
     chdir: "{{ home }}/findNeighbours4"
-    cmd: "./run_tests.sh"
+    cmd: "sh run_tests.sh"
