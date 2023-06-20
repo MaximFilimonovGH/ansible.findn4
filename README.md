@@ -3,8 +3,10 @@
 This playbook setups the findNeighbours4 application (https://github.com/davidhwyllie/findNeighbour4).
 
 The playbook also installs the following dependencies for running the Nextflow pipelines:
-* [Catwalk](https://github.com/dvolk/catwalk)
 * [Mongodb](https://www.mongodb.com/) 6.0.4
+* [Pipenv](https://pipenv.pypa.io/en/latest/)
+* [Nimble](https://nim-lang.org/) 1.6.4
+* [Catwalk](https://github.com/dvolk/catwalk)
 
 It is designed to run on a clean Ubuntu 20.04 server (i.e. a server on which mongodb, catwalk etc. have not yet been installed).
 
