@@ -24,3 +24,9 @@
 
 - name: install catwalk
   include_tasks: catwalk.yml
+
+- name: test catwalk
+  include_tasks: test_catwalk.yml
+
+# - name: install findNeighbours4
+#   include_tasks: findn4.yml

@@ -39,26 +39,3 @@
   environment:
     PATH: "{{ home }}/nim-{{ nim_version }}/bin:{{ lookup('env','PATH') }}"
   become: true
-
-- name: catwalk | install virtual env for testing catwalk
-  command:
-    chdir: "{{ home }}/catwalk"
-    cmd: "pipenv install --skip-lock"
-  become: true
-
-- name: catwalk | make tests script executable
-  command:
-    chdir: "{{ home }}/catwalk"
-    cmd: "chmod +x run_tests.sh"
-  become: true
-
-- name: catwalk | create .env file
-  copy:
-    dest: "{{ home }}/catwalk/.env"
-    content: "CW_BINARY_FILEPATH={{ home }}/catwalk/cw_server"
-
-- name: catwalk | run tests
-  command:
-    chdir: "{{ home }}/catwalk"
-    cmd: "pipenv run pytest test"
-  become: true
