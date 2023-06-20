@@ -33,3 +33,13 @@
     chdir: "{{ home }}/findNeighbours4"
     cmd: "pipenv run pip install bokeh==2.4.0 pandas==1.5.3 sqlalchemy==1.4.48"
   become: true
+
+- name: findn4 | add catwalk path to .env file for findn4
+  copy:
+    dest: "{{ home }}/findNeighbours4/.env"
+    content: "CW_BINARY_FILEPATH={{ home }}/catwalk/cw_server"
+
+- name: findn4 | run findNeighbours4 tests
+  command:
+    chdir: "{{ home }}/findNeighbours4"
+    cmd: "./run_tests.sh"
