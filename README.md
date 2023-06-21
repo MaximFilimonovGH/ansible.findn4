@@ -2,7 +2,7 @@
 
 This playbook setups the findNeighbours4 application (https://github.com/davidhwyllie/findNeighbour4).
 
-The playbook also installs the following dependencies for running the Nextflow pipelines:
+The playbook also installs the following dependencies for running findNeighbours4:
 * [Mongodb](https://www.mongodb.com/) 6.0.4
 * [Pipenv](https://pipenv.pypa.io/en/latest/)
 * [Nimble](https://nim-lang.org/) 1.6.4
