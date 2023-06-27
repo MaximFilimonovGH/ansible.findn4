@@ -8,9 +8,4 @@
 - name: findn4 | find flake8
   command:
     chdir: "{{ home }}/findNeighbours4"
-    cmd: "pipenv run pip list"
-
-- name: findn4 | find flake8
-  command:
-    chdir: "{{ home }}/findNeighbours4"
-    cmd: "pipenv run pip3 list"
+    cmd: "pipenv run flake8 --version"
