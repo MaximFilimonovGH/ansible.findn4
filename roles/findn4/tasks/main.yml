@@ -25,14 +25,14 @@
 - name: install catwalk
   include_tasks: catwalk.yml
 
-# - name: test catwalk
-#   include_tasks: test_catwalk.yml
+- name: test catwalk
+  include_tasks: test_catwalk.yml
 
 - name: install findNeighbours4
   include_tasks: findn4.yml
 
-- name: test findNeighbours4
-  include_tasks: test_findn4.yml
+# - name: test findNeighbours4
+#   include_tasks: test_findn4.yml
 
 - name: setup AC587 demo files
   include_tasks: findn4_demo_AC587.yml
