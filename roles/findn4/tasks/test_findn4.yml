@@ -1,6 +1,16 @@
 ---
-- name: findn4 | run findNeighbours4 tests
+# - name: findn4 | run findNeighbours4 tests
+#   command:
+#     chdir: "{{ home }}/findNeighbours4"
+#     cmd: "sh run_tests.sh"
+#   become: true
+
+- name: findn4 | find flake8
   command:
     chdir: "{{ home }}/findNeighbours4"
-    cmd: "sh run_tests.sh"
-  become: true
+    cmd: "pipenv run pip list"
+
+- name: findn4 | find flake8
+  command:
+    chdir: "{{ home }}/findNeighbours4"
+    cmd: "pipenv run pip3 list"
